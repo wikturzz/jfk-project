@@ -10,6 +10,10 @@ stat:	ID '=' expr0		#assign
 ;
 
 expr0:  expr1			#single0
+      | expr0 AND expr1     #andExpr
+      | expr0 OR expr1      #orExpr
+      | expr0 XOR expr1     #xorExpr
+      | NEG expr0           #negExpr
       | expr1 ADD expr1	#add
       | expr1 SUBSTRACT expr1 #sub
 ;
@@ -26,6 +30,9 @@ expr2:   INT			#int
        | STRING #string
        | TOINT expr2		#toint
        | TODOUBLE expr2		#todouble
+       | TOFLOAT expr2     #tofloat
+       | TOLONG expr2		#tolong
+       | BOOL       #bool
        | '[' array_element (',' array_element)* ']'      #array
        | '(' expr0 ')'		#par
 ;
@@ -45,14 +52,22 @@ TOINT: '(int)'
 TODOUBLE: '(double)'
     ;
 
+TOFLOAT: '(float)'
+    ;
+
+TOLONG: '(long)'
+    ;
+
 ID:   ('a'..'z'|'A'..'Z')+
    ;
 
-DOUBLE: '0'..'9'+'.''0'..'9'+
+INT: [0-9]+
     ;
 
-INT: '0'..'9'+
+
+DOUBLE: [0-9]+ '.' [0-9]+
     ;
+
 
 ADD: '+'
     ;
@@ -73,4 +88,19 @@ STRING :  '"' ( ~('\\'|'"') )* '"'
     ;
 
 WS:   (' '|'\t')+ { skip(); }
+    ;
+
+AND: '&'
+    ;
+
+OR: '|'
+    ;
+
+XOR: '^'
+    ;
+
+NEG: '!'
+    ;
+
+BOOL: 'true' | 'false'
     ;
