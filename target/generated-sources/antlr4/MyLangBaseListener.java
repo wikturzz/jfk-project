@@ -112,49 +112,49 @@ public class MyLangBaseListener implements MyLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNegExpr(MyLangParser.NegExprContext ctx) { }
+	@Override public void enterAnd(MyLangParser.AndContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNegExpr(MyLangParser.NegExprContext ctx) { }
+	@Override public void exitAnd(MyLangParser.AndContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOrExpr(MyLangParser.OrExprContext ctx) { }
+	@Override public void enterOr(MyLangParser.OrContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOrExpr(MyLangParser.OrExprContext ctx) { }
+	@Override public void exitOr(MyLangParser.OrContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterXorExpr(MyLangParser.XorExprContext ctx) { }
+	@Override public void enterXor(MyLangParser.XorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitXorExpr(MyLangParser.XorExprContext ctx) { }
+	@Override public void exitXor(MyLangParser.XorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAndExpr(MyLangParser.AndExprContext ctx) { }
+	@Override public void enterNot(MyLangParser.NotContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAndExpr(MyLangParser.AndExprContext ctx) { }
+	@Override public void exitNot(MyLangParser.NotContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -275,42 +275,6 @@ public class MyLangBaseListener implements MyLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTodouble(MyLangParser.TodoubleContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTofloat(MyLangParser.TofloatContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTofloat(MyLangParser.TofloatContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTolong(MyLangParser.TolongContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTolong(MyLangParser.TolongContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterBool(MyLangParser.BoolContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBool(MyLangParser.BoolContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -10,6 +10,8 @@ declare void @llvm.memcpy.p0i8.p0i8.i64(i8* noalias nocapture writeonly, i8* noa
 @strs = constant [5 x i8] c"%10s\00"
 @strspi = constant [3 x i8] c"%d\00"
 define i32 @main() nounwind{
+%arr = alloca i32
+store i32 3, i32* %arr
 %x = alloca i32
 store i32 10, i32* %x
 %y = alloca double
@@ -22,8 +24,6 @@ store double 2.5, double* %y
 store i32 %4, i32* %z
 %5 = load i32, i32* %z
 %6 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @strpi, i32 0, i32 0), i32 %5)
-%arr = alloca i32
-store i32 3, i32* %arr
 %d = alloca i32
 store i32 1, i32* %d
 %7 = load i32, i32* %d

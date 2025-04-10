@@ -101,53 +101,53 @@ public interface MyLangListener extends ParseTreeListener {
 	 */
 	void exitSub(MyLangParser.SubContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code negExpr}
+	 * Enter a parse tree produced by the {@code and}
 	 * labeled alternative in {@link MyLangParser#expr0}.
 	 * @param ctx the parse tree
 	 */
-	void enterNegExpr(MyLangParser.NegExprContext ctx);
+	void enterAnd(MyLangParser.AndContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code negExpr}
+	 * Exit a parse tree produced by the {@code and}
 	 * labeled alternative in {@link MyLangParser#expr0}.
 	 * @param ctx the parse tree
 	 */
-	void exitNegExpr(MyLangParser.NegExprContext ctx);
+	void exitAnd(MyLangParser.AndContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code orExpr}
+	 * Enter a parse tree produced by the {@code or}
 	 * labeled alternative in {@link MyLangParser#expr0}.
 	 * @param ctx the parse tree
 	 */
-	void enterOrExpr(MyLangParser.OrExprContext ctx);
+	void enterOr(MyLangParser.OrContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code orExpr}
+	 * Exit a parse tree produced by the {@code or}
 	 * labeled alternative in {@link MyLangParser#expr0}.
 	 * @param ctx the parse tree
 	 */
-	void exitOrExpr(MyLangParser.OrExprContext ctx);
+	void exitOr(MyLangParser.OrContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code xorExpr}
+	 * Enter a parse tree produced by the {@code xor}
 	 * labeled alternative in {@link MyLangParser#expr0}.
 	 * @param ctx the parse tree
 	 */
-	void enterXorExpr(MyLangParser.XorExprContext ctx);
+	void enterXor(MyLangParser.XorContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code xorExpr}
+	 * Exit a parse tree produced by the {@code xor}
 	 * labeled alternative in {@link MyLangParser#expr0}.
 	 * @param ctx the parse tree
 	 */
-	void exitXorExpr(MyLangParser.XorExprContext ctx);
+	void exitXor(MyLangParser.XorContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code andExpr}
+	 * Enter a parse tree produced by the {@code not}
 	 * labeled alternative in {@link MyLangParser#expr0}.
 	 * @param ctx the parse tree
 	 */
-	void enterAndExpr(MyLangParser.AndExprContext ctx);
+	void enterNot(MyLangParser.NotContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code andExpr}
+	 * Exit a parse tree produced by the {@code not}
 	 * labeled alternative in {@link MyLangParser#expr0}.
 	 * @param ctx the parse tree
 	 */
-	void exitAndExpr(MyLangParser.AndExprContext ctx);
+	void exitNot(MyLangParser.NotContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code single1}
 	 * labeled alternative in {@link MyLangParser#expr1}.
@@ -268,42 +268,6 @@ public interface MyLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTodouble(MyLangParser.TodoubleContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code tofloat}
-	 * labeled alternative in {@link MyLangParser#expr2}.
-	 * @param ctx the parse tree
-	 */
-	void enterTofloat(MyLangParser.TofloatContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code tofloat}
-	 * labeled alternative in {@link MyLangParser#expr2}.
-	 * @param ctx the parse tree
-	 */
-	void exitTofloat(MyLangParser.TofloatContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code tolong}
-	 * labeled alternative in {@link MyLangParser#expr2}.
-	 * @param ctx the parse tree
-	 */
-	void enterTolong(MyLangParser.TolongContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code tolong}
-	 * labeled alternative in {@link MyLangParser#expr2}.
-	 * @param ctx the parse tree
-	 */
-	void exitTolong(MyLangParser.TolongContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code bool}
-	 * labeled alternative in {@link MyLangParser#expr2}.
-	 * @param ctx the parse tree
-	 */
-	void enterBool(MyLangParser.BoolContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code bool}
-	 * labeled alternative in {@link MyLangParser#expr2}.
-	 * @param ctx the parse tree
-	 */
-	void exitBool(MyLangParser.BoolContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code array}
 	 * labeled alternative in {@link MyLangParser#expr2}.
