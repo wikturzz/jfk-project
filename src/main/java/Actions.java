@@ -33,6 +33,7 @@ class Array extends Value {
     }
 
 }
+
 public class Actions extends MyLangBaseListener {
 
     Map<String, Value> variables = new HashMap<>();
@@ -123,7 +124,7 @@ public class Actions extends MyLangBaseListener {
                 stack.push(new Value("%" + (Generator.reg - 1), "DOUBLE"));
             }
         } else {
-            error(ctx.getStart().getLine(), "There is a mismatch in substract operation");
+            error(ctx.getStart().getLine(), "There is a mismatch in subtract operation");
         }
     }
 
@@ -230,87 +231,68 @@ public class Actions extends MyLangBaseListener {
         Generator.scanf(ID, 127);
     }
 
+    // LOGICAL OPERATORS
     @Override
-    public void enterArray(MyLangParser.ArrayContext context) {
-        final var id = "arr" + (Generator.arr - 1);
-        final var array = new Array(id, "UNKNOWN", 0);
-        arrayStack.push(array);
-        Generator.arr++;
-    }
+    public void exitAnd(MyLangParser.AndContext ctx) {
+        Value v1 = stack.pop();
+        Value v2 = stack.pop();
 
-    @Override
-    public void exitArray(MyLangParser.ArrayContext context) {
-        final var array = arrayStack.pop();
-        Generator.declare_array(array.name, array.size, array.type);
-
-        for (var index = 0; index < array.size; index++) {
-            final var value = array.values.get(index);
-            Generator.assign_array_item(array.name, array.size, String.valueOf(index), value.name, value.type);
-        }
-
-        if (context.getParent() instanceof MyLangParser.ArrayItemContext) {
-            return;
-        }
-
-        stack.push(array);
-    }
-
-    @Override
-    public void exitArrayElement(MyLangParser.ArrayElementContext context) {
-        final var value = stack.pop();
-        final var array = arrayStack.peek();
-        array.values.add(value);
-        array.size++;
-
-        if (array.type.equals("UNKNOWN")) {
-            array.type = value.type;
-            return;
-        }
-
-        if (!array.type.equals(value.type)) {
-            error(context.getStart().getLine(), "Array and item types are different");
+        // Short-circuit: Jeśli v1 to 0 (false), wynik to 0 (false)
+        if (v1.type.equals("INT") && v2.type.equals("INT")) {
+            if (Integer.parseInt(v1.name) == 0) {
+                // Jeśli v1 jest false (0), wynik będzie 0, nie sprawdzamy v2
+                stack.push(new Value("0", "INT"));
+            } else {
+                // Inaczej wykonaj operację AND
+                Generator.and_i32(v1.name, v2.name);
+                stack.push(new Value("%" + (Generator.reg - 1), "INT"));
+            }
+        } else {
+            error(ctx.getStart().getLine(), "Operands of '&&' must be of type INT.");
         }
     }
 
     @Override
-    public void exitArrayItem(MyLangParser.ArrayItemContext context) {
-        final var array = variables.get(context.ID().getText());
+    public void exitOr(MyLangParser.OrContext ctx) {
+        Value v1 = stack.pop();
+        Value v2 = stack.pop();
 
-        if (array == null) {
-            error(context.getStart().getLine(), "Array not defined " + context.getText());
+        // Short-circuit: Jeśli v1 to 1 (true), wynik to 1 (true)
+        if (v1.type.equals("INT") && v2.type.equals("INT")) {
+            if (Integer.parseInt(v1.name) != 0) {
+                // Jeśli v1 jest true (1), wynik będzie 1, nie sprawdzamy v2
+                stack.push(new Value("1", "INT"));
+            } else {
+                // Inaczej wykonaj operację OR
+                Generator.or_i32(v1.name, v2.name);
+                stack.push(new Value("%" + (Generator.reg - 1), "INT"));
+            }
+        } else {
+            error(ctx.getStart().getLine(), "Operands of '||' must be of type INT.");
         }
-
-        final var index = stack.pop();
-
-        if (!index.type.equals("INT")) {
-            error(context.getStart().getLine(), "Array index must be int");
-        }
-
-        Generator.load_array_value(array.name, array.size, index.name, array.type);
-        stack.push(new Value("%" + (Generator.reg - 1), array.type));
     }
 
     @Override
-    public void exitAssignArray(MyLangParser.AssignArrayContext context) {
-        final var ID = context.ID().getText();
-        final var array = variables.get(ID);
-
-        if (array == null) {
-            error(context.getStart().getLine(), "Array with ID: " + ID + " is not defined");
+    public void exitXor(MyLangParser.XorContext ctx) {
+        Value v1 = stack.pop();
+        Value v2 = stack.pop();
+        if (v1.type.equals("INT") && v2.type.equals("INT")) {
+            Generator.xor_i32(v1.name, v2.name);
+            stack.push(new Value("%" + (Generator.reg - 1), "INT"));
+        } else {
+            error(ctx.getStart().getLine(), "Operands of '^' must be of type INT.");
         }
+    }
 
-        final var value = stack.pop();
-        final var index = stack.pop();
-
-        if (!index.type.equals("INT")) {
-            error(context.getStart().getLine(), "Array index must be int");
+    @Override
+    public void exitNot(MyLangParser.NotContext ctx) {
+        Value v = stack.pop();
+        if (v.type.equals("INT")) {
+            Generator.not_i32(v.name);
+            stack.push(new Value("%" + (Generator.reg - 1), "INT"));
+        } else {
+            error(ctx.getStart().getLine(), "Operand of '!' must be of type INT.");
         }
-
-        if (!value.type.equals(array.type)) {
-            error(context.getStart().getLine(), "Array and array element type is not the same");
-        }
-
-        Generator.assign_array_item(array.name, array.size, index.name, value.name, value.type);
     }
 
     void error(int line, String msg) {

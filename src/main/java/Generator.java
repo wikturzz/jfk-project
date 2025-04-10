@@ -38,7 +38,6 @@ class Generator {
         main_text += "store double " + value + ", double* %" + id + "\n";
     }
 
-
     static void load_i32(String id) {
         main_text += "%" + reg + " = load i32, i32* %" + id + "\n";
         reg++;
@@ -89,7 +88,6 @@ class Generator {
         main_text += "store i8* " + bitcastReg + ", i8** %" + id + "\n";
     }
 
-
     static void load_string(String id) {
         main_text += "%" + reg + " = load i8*, i8** %" + id + "\n";
         reg++;
@@ -126,6 +124,7 @@ class Generator {
                 (reg - 1) + ")\n";
         reg++;
     }
+
     static void constant_string(String content) {
         final int length = content.length() + 1;
         header_text += "@str" + str + " = constant [" + length + " x i8] c\"" + content + "\\00\"\n";
@@ -189,6 +188,31 @@ class Generator {
         };
     }
 
+    // NOWE METODY - LOGICAL OPERATORS
+
+    // AND operation
+    static void and_i32(String val1, String val2) {
+        main_text += "%" + reg + " = and i32 " + val1 + ", " + val2 + "\n";
+        reg++;
+    }
+
+    // OR operation
+    static void or_i32(String val1, String val2) {
+        main_text += "%" + reg + " = or i32 " + val1 + ", " + val2 + "\n";
+        reg++;
+    }
+
+    // XOR operation
+    static void xor_i32(String val1, String val2) {
+        main_text += "%" + reg + " = xor i32 " + val1 + ", " + val2 + "\n";
+        reg++;
+    }
+
+    // NEG (NOT) operation
+    static void not_i32(String val) {
+        main_text += "%" + reg + " = sub i32 1, " + val + "\n";
+        reg++;
+    }
 
     static String generate() {
         return "declare i32 @printf(i8*, ...)\n" +
@@ -207,5 +231,5 @@ class Generator {
                 main_text +
                 "ret i32 0 }\n";
     }
-
 }
+

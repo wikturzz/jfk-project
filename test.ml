@@ -12,4 +12,3 @@ print inputVal
 
 m = (double) z * 3.14
 print m
-
